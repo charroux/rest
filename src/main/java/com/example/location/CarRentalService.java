@@ -15,16 +15,45 @@ import org.springframework.web.server.ResponseStatusException;
 public class CarRentalService {
 
 	Car ferrari = new Car();
-	
-	@GetMapping("/hello")
-	public String sayHello(){
-		return "Bonjour !";
-	}
 
+	/**
+	 * PUT
+	 * http://localhost:8080/cars/22BB33?prix=3000
+	 * @param plaque
+	 * @param prix
+	 * @return
+	 */
 	@PutMapping("/cars/{plaque}")
 	public Car getCar(@PathVariable("plaque") String plaque, @RequestParam("prix") int prix){
 		ferrari.setPlaque(plaque);
 		ferrari.setPrix(prix);
 		return ferrari;
+	}
+
+	/**
+	 * GET
+	 * http://localhost:8080/cars/22BB33
+	 * @param plaque
+	 * @return
+	 */
+	@GetMapping("/cars/{plaque}")
+	public Car getCar(@PathVariable("plaque") String plaque){
+		if(ferrari.getPlaque().equals(plaque)){
+			return ferrari;
+		}
+		return null;
+	}
+
+	/**
+	 * http://localhost:8080/cars?prix=3000
+	 * @param prix
+	 * @return
+	 */
+	@GetMapping("/cars")
+	public Car getCar1(@RequestParam("prix") int prix){
+		if(ferrari.getPrix() == prix){
+			return ferrari;
+		}
+		return null;
 	}
 }
