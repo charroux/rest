@@ -1,5 +1,6 @@
 package com.example.location;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class CarRentalService {
+
+	Car ferrari = new Car();
 	
 	@GetMapping("/hello")
 	public String sayHello(){
@@ -19,7 +22,9 @@ public class CarRentalService {
 	}
 
 	@PutMapping("/cars/{plaque}")
-	public String getCar(@PathVariable("plaque") String plaque, @RequestParam("rent") boolean rent){
-		return plaque + " " + rent;
+	public Car getCar(@PathVariable("plaque") String plaque, @RequestParam("prix") int prix){
+		ferrari.setPlaque(plaque);
+		ferrari.setPrix(prix);
+		return ferrari;
 	}
 }
