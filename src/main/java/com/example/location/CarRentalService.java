@@ -17,5 +17,9 @@ public class CarRentalService {
 	public String sayHello(){
 		return "Bonjour !";
 	}
-	
+
+	@PutMapping("/cars/{plaque}")
+	public String getCar(@PathVariable("plaque") String plaque, @RequestParam("rent") boolean rent){
+		return plaque + " " + rent;
+	}
 }
